@@ -1,2 +1,1 @@
-import CityInfo from './CityInfo'
-export default CityInfo
+export {default} from './CityInfo'

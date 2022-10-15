@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render , fireEvent} from '@testing-library/react'
 import CityList from './CityList'
 
 const cities = [
@@ -9,25 +9,25 @@ const cities = [
     {city: "Ciudad de Mexico", country: "Mexico" }, 
   ]
 
-test("CityList render", async () => {
- 
+test("CityList renders" , async () => {
 
-    const { findAllByRole } = render(<CityList cities={cities} />)
-
-    const items = await findAllByRole("listitem")
-
-    expect(items).toHaveLength(4)
-
-})
-test("CityList click on item", async () => {
-  //funcion mock =>imita a la funcion real
   const fnClickOnItem = jest.fn()
 
-  const { findAllByRole } = render(<CityList cities={cities} onClickCity={fnClickOnItem} />)
+  const{ findAllByRole } = render(<CityList cities={cities} onClickCity={fnClickOnItem} />)
 
-  const items = await findAllByRole("listitem")
+  const items = await findAllByRole("button")
 
-  fireEvent.click(items[0])
+  expect(items).toHaveLength(4)
+})
 
-  expect(fnClickOnItem).toHaveBeenCalledTimes(1)
+test ("CityList click on item", async () => {
+   const fnClickOnItem = jest.fn()
+   
+   const{ findAllByRole } = render(<CityList cities ={cities} onClickCity={fnClickOnItem} />)
+
+   const items = await findAllByRole("button")
+  
+   fireEvent.click(items[0])
+
+   expect(fnClickOnItem).toHaveBeenCalledTimes(1)
 })
